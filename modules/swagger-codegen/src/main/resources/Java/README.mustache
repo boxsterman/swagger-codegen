@@ -141,6 +141,13 @@ Class | Method | HTTP request | Description
 ## Recommendation
 
 It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
+{{#useBeanValidation}}
+
+ ## Validation Support
+
+Bean validation support has been enabled and a model can be validated against the bean validation annotations.
+Please see the test files for examples.
+{{/useBeanValidation}}
 
 ## Author
 
