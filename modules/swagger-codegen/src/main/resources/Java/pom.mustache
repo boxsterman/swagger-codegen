@@ -199,7 +199,7 @@
     <dependency>
         <groupId>javax.validation</groupId>
         <artifactId>validation-api</artifactId>
-        <version>1.1.0.Final</version>
+        <version>${javax-validation-version}</version>
         <scope>provided</scope>
     </dependency>
 {{/useBeanValidation}}    
@@ -210,6 +210,27 @@
       <version>${junit-version}</version>
       <scope>test</scope>
     </dependency>
+{{#useBeanValidation}}
+    <!-- Test support for validation -->
+    <dependency>
+      <groupId>javax.el</groupId>
+      <artifactId>javax.el-api</artifactId>
+      <version>${javax-el-version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.web</groupId>
+      <artifactId>javax.el</artifactId>
+      <version>${javax-el-version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>${hibernate-validator-version}</version>
+      <scope>test</scope>
+    </dependency>
+{{/useBeanValidation}}
   </dependencies>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -225,5 +246,10 @@
     {{/supportJava6}}
     <maven-plugin-version>1.0.0</maven-plugin-version>
     <junit-version>4.12</junit-version>
+    {{#useBeanValidation}}
+    <javax-el-version>2.2.4</javax-el-version>
+    <javax-validation-version>1.1.0.Final</javax-validation-version>
+    <hibernate-validator-version>5.3.3.Final</hibernate-validator-version>
+    {{/useBeanValidation}}
   </properties>
 </project>
