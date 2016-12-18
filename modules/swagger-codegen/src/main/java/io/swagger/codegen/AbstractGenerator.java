@@ -52,6 +52,7 @@ public abstract class AbstractGenerator {
 
     public Reader getTemplateReader(String name) {
         try {
+            LOGGER.info("Processing template: " + this.getClass().getClassLoader().getResource(getCPResourcePath(name)).getPath());
             InputStream is = this.getClass().getClassLoader().getResourceAsStream(getCPResourcePath(name));
             if (is == null) {
                 is = new FileInputStream(new File(name)); // May throw but never return a null value
