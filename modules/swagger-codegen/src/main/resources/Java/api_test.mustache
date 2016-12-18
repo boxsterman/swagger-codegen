@@ -13,6 +13,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 {{/fullJavaUtil}}
+{{#useBeanValidation}}
+import javax.validation.Validation;
+import javax.validation.Validator;
+{{/useBeanValidation}}
 
 /**
  * API tests for {{classname}}
@@ -36,8 +40,23 @@ public class {{classname}}Test {
         {{{dataType}}} {{paramName}} = null;
         {{/allParams}}
         // {{#returnType}}{{{returnType}}} response = {{/returnType}}api.{{operationId}}({{#allParams}}{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}});
-
-        // TODO: test validations
     }
+    {{#useBeanValidation}}
+
+    /**
+     * Validates all parameter for {{operationId}} using bean validation.
+     */
+    @Test
+    public void {{operationId}}ValidationTest() {
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+        {{#bodyParams}}
+        {{^isPrimitiveType}}
+        {{{dataType}}} {{paramName}} = null;
+        // assert validator.validate({{paramName}}).size() == 0;
+        {{/isPrimitiveType}}
+        {{/bodyParams}}
+    }
+    {{/useBeanValidation}}
+
     {{/operation}}{{/operations}}
 }
